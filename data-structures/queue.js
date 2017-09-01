@@ -28,7 +28,7 @@ myQueue.count()
 => number of elements in queue
 
 
-*** Additional Exercises:
+*** Completed Exercises:
 
 Modify your queue to take a max capacity and return a string if you try to add an element when there's no more room:
 myQueue.enqueue(value)
@@ -38,6 +38,8 @@ Create a contains method to check if a value is in the queue:
 myQueue.contains('findme')
 => true/false
 What's the time complexity?
+
+*** Pending Exercises
 
 Create an until method to get the number of dequeues until you get to a certain value:
 queue values - (first)2-5-7-3-6-9(last)
@@ -49,34 +51,77 @@ What's the time complexity?
 
 
  */
-
-function Queue(capacity) {
-  // implement me...
+function Queue(maxCapacity){
+    this.storage = {};
+    this.maxCapacity = maxCapacity;
 }
 
-Queue.prototype.enqueue = function(value) {
-  // implement me...
+Queue.prototype.enqueue = function(value){
+    var count = 0;
+    var result;
+    for(let prop in this.storage){
+        count++;
+    }
+    if(count <= this.maxCapacity){
+        this.storage[count] = value;
+        result = count;
+    }else{
+        result = "Max capacity reached, please remove item before adding" +
+            " another";
+    }
+    return result;
 };
-// Time complexity:
+/*=> count of queue
+ add value to collection*/
 
-Queue.prototype.dequeue = function() {
-  // implement me...
-};
-// Time complexity:
+ //Time complexity
 
-Queue.prototype.peek = function() {
-  // implement me...
+Queue.prototype.dequeue = function(){
+    var newest = this.storage[this.count()-1];
+    delete (this.storage[this.count()-1]);
+    return newest;
 };
+   /* => oldest element added collection
+Remove item so that it is no longer in collection*/
 
-Queue.prototype.count = function() {
-  // implement me...
-};
-// Time complexity:
+ //Time complexity
+
+Queue.prototype.contains = function(val){
+    var result = false;
+    for(let prop in this.storage){
+        console.log(this.storage[prop]);
+        if (this.storage[prop] === val){
+           result = true;
+            }
+        }
+        console.log(result);
+        return result;
+    };
+ //Time complexity
+
+
+Queue.prototype.peek = function(){
+    var newest = this.storage[this.count()-1];
+    return newest;
+}
+    /*=> oldest element added collection
+Similiar to dequeue, but do not remove element from collection*/
+
+Queue.prototype.count = function(){
+    var count = 0;
+    for(let prop in this.storage){
+        count++;
+    }
+    return count;
+}
+   /* => number of elements in queue*/
+
+    //Time complexity
 
 
 
 /*
-*** Exercises:
+*** Pending Exercises:
 
 1. Implement a queue using two stacks.
 
